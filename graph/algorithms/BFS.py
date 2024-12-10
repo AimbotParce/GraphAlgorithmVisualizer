@@ -1,5 +1,5 @@
 from collections import deque
-from typing import Any, TypeVar
+from typing import Any, TypeVar, overload
 
 from .. import Node
 
@@ -8,6 +8,14 @@ T = TypeVar("T")
 
 class undefined:
     pass
+
+
+@overload
+def searchBreathFirst(start: Node[T], id: str | int) -> None | Node[T]: ...
+@overload
+def searchBreathFirst(start: Node[T], content: T) -> None | Node[T]: ...
+@overload
+def searchBreathFirst(start: Node[T]) -> None: ...
 
 
 def searchBreathFirst(start: Node[T], id: str | int = undefined, content: T = undefined) -> None | Node[T]:
@@ -20,6 +28,8 @@ def searchBreathFirst(start: Node[T], id: str | int = undefined, content: T = un
         id (str | int): The id of the node to search.
         content (T): The content of the node to search.
     """
+    if id is not undefined and content is not undefined:
+        raise ValueError("You can't provide both id and content.")
     queue = deque([start])
     while queue:
         current = queue.popleft()
