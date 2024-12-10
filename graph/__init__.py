@@ -5,5 +5,6 @@ from .node import BaseNode, NodeVisitLogger
 pass
 
 from .algorithms import searchBreathFirst
+from .plotting import plot_graph
 
-__all__ = ["BaseNode", "NodeVisitLogger", "Node"]
+__all__ = ["BaseNode", "NodeVisitLogger", "Node", "searchBreathFirst", "plot_graph"]
