@@ -50,18 +50,11 @@ class NodeVisitLogger:
 current_logger = contextvars.ContextVar[NodeVisitLogger]("current_logger", default=None)
 
 
-def resetVisited(node: "BaseNode[T]") -> None:
-    node._visited = False
-    for child in node._children:
-        resetVisited(child)
-
-
 class BaseNode(Generic[T]):
     def __init__(self, id: str | int, content: T):
         self._id = id
         self._content = content
         self._children = deque[BaseNode]()
-        self._visited = False
 
     def addChild(self, child: "BaseNode[T]") -> None:
         self._children.append(child)
